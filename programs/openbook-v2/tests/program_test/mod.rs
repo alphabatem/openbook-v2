@@ -10,7 +10,10 @@ use solana_program::{program_option::COption, program_pack::Pack};
 use solana_program_test::*;
 use solana_sdk::pubkey::Pubkey;
 pub use solana_sdk::transport::TransportError;
-use spl_token::{state::*, *};
+// use spl_token::{state::*, *};
+use spl_token_2022::{state::*, *};
+// use anchor_spl::token_2022::Token2022;
+// use anchor_spl::token_interface::{self, TokenInterface};
 
 use crate::program_test::setup::{create_open_orders_account, create_open_orders_indexer, Token};
 
@@ -187,7 +190,7 @@ impl TestContextBuilder {
                     decimals: mint.decimals,
                     ..Mint::default()
                 },
-                &spl_token::id(),
+                &spl_token_2022::id(),
             );
         }
 
@@ -216,14 +219,14 @@ impl TestContextBuilder {
                 self.test.add_packable_account(
                     token_key,
                     u32::MAX as u64,
-                    &spl_token::state::Account {
+                    &spl_token_2022::state::Account {
                         mint: mint.pubkey,
                         owner: user_key.pubkey(),
                         amount: 1_000_000_000_000_000_000,
-                        state: spl_token::state::AccountState::Initialized,
-                        ..spl_token::state::Account::default()
+                        state: spl_token_2022::state::AccountState::Initialized,
+                        ..spl_token_2022::state::Account::default()
                     },
-                    &spl_token::id(),
+                    &spl_token_2022::id(),
                 );
 
                 token_accounts.push(token_key);
@@ -348,6 +351,18 @@ impl TestContext {
         } else {
             None
         };
+
+        // println!("Logging");
+
+        // println!("{:?}", collect_fee_admin_acc.pubkey());
+        // println!("{:?}", open_orders_admin);
+        // println!("{:?}", close_market_admin);
+        // println!("{:?}", consume_events_admin);
+        // println!("{:?}", payer);
+        // println!("{:?}", market);
+        // println!("{:?}", mints[0].pubkey);
+        // println!("{:?}", mints[1].pubkey);
+        // println!("{:?}", oracle);
 
         let openbook_v2::accounts::CreateMarket {
             market,

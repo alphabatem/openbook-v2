@@ -1005,9 +1005,6 @@ impl ClientInstruction for SweepFeesInstruction {
             })
         }
         instruction.accounts.append(&mut vec_remainings);
-        // println!("side sweep");
-        // println!("side sweep");
-        // println!("side sweep");
         (accounts, instruction)
     }
 

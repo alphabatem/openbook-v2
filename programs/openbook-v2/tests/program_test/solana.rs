@@ -209,7 +209,7 @@ impl SolanaCookie {
             .await
             .unwrap();
 
-        spl_associated_token_account::get_associated_token_address(owner, &mint)
+        spl_associated_token_account::get_associated_token_address_with_program_id(owner, &mint, &spl_token_2022::id())
     }
 
     // Note: Only one table can be created per authority per slot!

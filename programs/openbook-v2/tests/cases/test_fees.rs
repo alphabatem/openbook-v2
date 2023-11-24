@@ -120,10 +120,6 @@ async fn test_fees_accrued() -> Result<(), TransportError> {
         .create_associated_token_account(&collect_fee_admin.pubkey(), mints[1].pubkey)
         .await;
 
-    println!("{:?}", admin_token_1);
-    println!("{:?}", admin_token_1);
-    println!("{:?}", admin_token_1);
-
     send_tx(
         solana,
         SettleFundsInstruction {
@@ -149,9 +145,6 @@ async fn test_fees_accrued() -> Result<(), TransportError> {
         assert_eq!(market.fees_accrued, 10);
         assert_eq!(market.fees_to_referrers, 0);
     }
-
-    // println!({:?}, market_base_vault);
-    // println!({:?}, market_quote_vault);
 
     send_tx(
         solana,

@@ -1,10 +1,10 @@
 use super::*;
-use anchor_spl::token::ID;
+use anchor_spl::token_2022::ID;
 use bytemuck::cast_ref;
 
 #[tokio::test]
 async fn test_skip_missing_accounts() -> Result<(), TransportError> {
-    let context = TestContext::new(false).await;
+    let context = TestContext::new(true).await;
     let solana = &context.solana.clone();
 
     let collect_fee_admin = TestKeypair::new();
@@ -16,7 +16,7 @@ async fn test_skip_missing_accounts() -> Result<(), TransportError> {
     let owner_token_0 = context.users[0].token_accounts[0];
     let owner_token_1 = context.users[0].token_accounts[1];
 
-    let tokens = Token::create(mints.to_vec(), solana, collect_fee_admin, payer, false).await;
+    let tokens = Token::create(mints.to_vec(), solana, collect_fee_admin, payer, true).await;
 
     let market = TestKeypair::new();
 
@@ -193,7 +193,7 @@ async fn test_skip_missing_accounts() -> Result<(), TransportError> {
 
 #[tokio::test]
 async fn test_crank_given_events() -> Result<(), TransportError> {
-    let context = TestContext::new(false).await;
+    let context = TestContext::new(true).await;
     let solana = &context.solana.clone();
 
     let collect_fee_admin = TestKeypair::new();
@@ -205,7 +205,7 @@ async fn test_crank_given_events() -> Result<(), TransportError> {
     let owner_token_0 = context.users[0].token_accounts[0];
     let owner_token_1 = context.users[0].token_accounts[1];
 
-    let tokens = Token::create(mints.to_vec(), solana, collect_fee_admin, payer, false).await;
+    let tokens = Token::create(mints.to_vec(), solana, collect_fee_admin, payer, true).await;
 
     let market = TestKeypair::new();
 

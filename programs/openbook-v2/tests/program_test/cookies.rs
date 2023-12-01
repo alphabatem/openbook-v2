@@ -11,6 +11,7 @@ pub struct MintCookie {
     pub quote_lot: f64,
     pub pubkey: Pubkey,
     pub authority: TestKeypair,
+    pub keypair: TestKeypair,
 }
 
 #[derive(Debug, Clone)]

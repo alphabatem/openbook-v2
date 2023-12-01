@@ -1,4 +1,5 @@
 use super::*;
+use anchor_spl::token::ID;
 
 #[tokio::test]
 async fn test_inmediate_order() -> Result<(), TransportError> {
@@ -44,6 +45,7 @@ async fn test_inmediate_order() -> Result<(), TransportError> {
             order_type: PlaceOrderType::Limit,
             self_trade_behavior: SelfTradeBehavior::default(),
             remainings: vec![],
+            token_program: ID,
         },
     )
     .await
@@ -72,6 +74,7 @@ async fn test_inmediate_order() -> Result<(), TransportError> {
             order_type: PlaceOrderType::ImmediateOrCancel,
             self_trade_behavior: SelfTradeBehavior::default(),
             remainings: vec![],
+            token_program: ID,
         },
     )
     .await
@@ -138,6 +141,7 @@ async fn test_inmediate_order() -> Result<(), TransportError> {
             quote_mint: mints[1].pubkey,
             referrer_account: None,
             remainings: vec![],
+            token_program: ID,
         },
     )
     .await
@@ -170,6 +174,7 @@ async fn test_inmediate_order() -> Result<(), TransportError> {
             order_type: PlaceOrderType::Limit,
             self_trade_behavior: SelfTradeBehavior::default(),
             remainings: vec![],
+            token_program: ID,
         },
     )
     .await
@@ -199,6 +204,7 @@ async fn test_inmediate_order() -> Result<(), TransportError> {
             order_type: PlaceOrderType::PostOnly,
             self_trade_behavior: SelfTradeBehavior::default(),
             remainings: vec![],
+            token_program: ID,
         },
     )
     .await
@@ -247,6 +253,7 @@ async fn test_inmediate_order() -> Result<(), TransportError> {
             order_type: PlaceOrderType::PostOnly,
             self_trade_behavior: SelfTradeBehavior::default(),
             remainings: vec![],
+            token_program: ID,
         },
     )
     .await
@@ -294,6 +301,7 @@ async fn test_inmediate_order() -> Result<(), TransportError> {
             order_type: PlaceOrderType::PostOnlySlide,
             self_trade_behavior: SelfTradeBehavior::default(),
             remainings: vec![],
+            token_program: ID,
         },
     )
     .await

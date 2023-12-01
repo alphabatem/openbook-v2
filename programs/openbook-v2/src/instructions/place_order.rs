@@ -135,6 +135,12 @@ pub fn place_order<'info>(
         deposit_decimals = None;
     }
 
+    msg!("Before Transfer");
+    msg!("Before Transfer");
+    msg!("Before Transfer");
+    msg!("Before Transfer");
+    msg!("Before Transfer");
+
     token_transfer(
         &ctx.accounts.token_program,
         &ctx.accounts.user_token_account,

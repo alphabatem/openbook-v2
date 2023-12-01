@@ -5,6 +5,7 @@ use anchor_lang::prelude::*;
 use super::client::*;
 use super::solana::SolanaCookie;
 use super::{send_tx, MintCookie, TestKeypair, UserCookie};
+use spl_token_2022::extension::transfer_fee::instruction::initialize_transfer_fee_config;
 
 #[derive(Clone)]
 pub struct Token {
@@ -20,10 +21,27 @@ impl Token {
         solana: &SolanaCookie,
         owner: TestKeypair,
         payer: TestKeypair,
+        is_v2: bool,
     ) -> Vec<Token> {
         let mut tokens = vec![];
 
         for (index, mint) in mints.iter().enumerate() {
+
+            // Initializing TransferFeeConfig
+            if is_v2 {
+                let transfer_config_ix = initialize_transfer_fee_config(
+                    &spl_token_2022::id(),
+                    &mint.pubkey,
+                    None,
+                    None,
+                    100,
+                    600000,
+                ).unwrap();
+    
+                let _ = solana.process_transaction(&[transfer_config_ix], Some(&[owner, payer, mint.keypair])).await.unwrap();
+            } else {
+            }
+
             let create_stub_oracle_accounts = send_tx(
                 solana,
                 StubOracleCreate {

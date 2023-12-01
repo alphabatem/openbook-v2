@@ -1,5 +1,5 @@
 use super::*;
-use anchor_spl::token::ID;
+use anchor_spl::token_2022::ID;
 
 #[tokio::test]
 async fn test_take_ask_order() -> Result<(), TransportError> {
@@ -19,7 +19,7 @@ async fn test_take_ask_order() -> Result<(), TransportError> {
         account_1,
         account_2,
         ..
-    } = TestContext::new_with_market(TestNewMarketInitialize::default()).await?;
+    } = TestContext::new_with_market_v2(TestNewMarketInitialize::default()).await?;
     let solana = &context.solana.clone();
 
     // Set the initial oracle price
@@ -176,7 +176,7 @@ async fn test_take_bid_order() -> Result<(), TransportError> {
         account_1,
         account_2,
         ..
-    } = TestContext::new_with_market(TestNewMarketInitialize::default()).await?;
+    } = TestContext::new_with_market_v2(TestNewMarketInitialize::default()).await?;
     let solana = &context.solana.clone();
 
     // Set the initial oracle price
@@ -212,7 +212,7 @@ async fn test_take_bid_order() -> Result<(), TransportError> {
     let balance_quote = solana.token_account_balance(owner_token_1).await;
 
     let admin_token_1 = solana
-        .create_associated_token_account(&collect_fee_admin.pubkey(), mints[1].pubkey, false)
+        .create_associated_token_account(&collect_fee_admin.pubkey(), mints[1].pubkey, true)
         .await;
     let balance_referral = solana.token_account_balance(admin_token_1).await;
 
